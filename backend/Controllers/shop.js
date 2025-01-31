@@ -3,7 +3,7 @@ const Item = require('../Models/shop');
 // Add Item Controller
 const addItem = async (req, res) => {
   try {
-    const { name, price, description } = req.body;
+    const { name, price, description, category } = req.body;
     const imagePaths = req.files.map(file => file.path); // Extract image paths
 
     // Save the new item in the database
@@ -11,6 +11,7 @@ const addItem = async (req, res) => {
       name,
       price,
       description,
+      category,
       author : req.user ? req.user._id : null,
       images: imagePaths,
     });
@@ -66,6 +67,7 @@ const updateItem = async (req, res) => {
     item.name = name || item.name;
     item.price = price || item.price;
     item.description = description || item.description;
+    item.category = category || item.category;
 
     if (replaceImages === 'true') {
       // Replace all existing images with new ones

@@ -17,7 +17,15 @@ const itemSchema = new mongoose.Schema({
   },
   description: { 
     type: String, 
-    required: true 
+    required: false 
+  },
+  category: {
+    type: String,
+  },
+  role: {
+    type: String,
+    default: 'user',
+    enum: ['user', 'admin']
   },
   images: {
     type: [String],
